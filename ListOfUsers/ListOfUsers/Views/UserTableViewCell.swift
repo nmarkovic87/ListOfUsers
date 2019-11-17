@@ -9,8 +9,9 @@
 import UIKit
 import Alamofire
 
+///Custom table view cell class with information about user
 class UserTableViewCell: UITableViewCell {
-
+    
     var photosManager: PhotosManager { return .shared }
     var request: Request?
     var photo: UserPhoto!
@@ -27,7 +28,7 @@ class UserTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
     }
     
     override func layoutSubviews() {
@@ -36,37 +37,46 @@ class UserTableViewCell: UITableViewCell {
     }
     
 }
-
+///Custom table view cell extension
 extension UserTableViewCell {
     
-       func loadAvatarImage(_ url:String) {
-           removePicture()
-           loadPicture(url)
-       }
-
-       func removePicture() {
-           thumbnailImage.image = nil
-           request?.cancel()
-       }
-
-      func loadPicture(_ url:String) {
-           if let image = photosManager.cachedImage(for: url) {
-               populateCellAvatarWithPicture(with: image)
-               return
-           }
-           downloadPicture(url)
-       }
-
-       func downloadPicture(_ url:String) {
-           loadingIndicator.startAnimating()
-           request = photosManager.retrieveImage(for: url) { image in
-               self.populateCellAvatarWithPicture(with: image)
-           }
-       }
-
-       func populateCellAvatarWithPicture(with image: UIImage) {
-           loadingIndicator.stopAnimating()
-           loadingIndicator.isHidden = true
-           thumbnailImage.image = image
-       }
+    /// Load avatar image in user cell
+    /// - Parameter url: url for downloading avatar image
+    func loadAvatarImage(_ url:String) {
+        removePicture()
+        loadPicture(url)
+    }
+    
+    /// Remove avatar image from user cell
+    func removePicture() {
+        thumbnailImage.image = nil
+        request?.cancel()
+    }
+    
+    /// Load cached image
+    /// - Parameter url: URL for avatar image
+    func loadPicture(_ url:String) {
+        if let image = photosManager.getCachedImage(for: url) {
+            populateCellAvatarWithPicture(with: image)
+            return
+        }
+        downloadPicture(url)
+    }
+    
+    /// Download avatar image from server
+    /// - Parameter url: URL for image
+    func downloadPicture(_ url:String) {
+        loadingIndicator.startAnimating()
+        request = photosManager.retrieveImage(for: url) { image in
+            self.populateCellAvatarWithPicture(with: image)
+        }
+    }
+    
+    /// Populate image view in cell
+    /// - Parameter image: current image avatar
+    func populateCellAvatarWithPicture(with image: UIImage) {
+        loadingIndicator.stopAnimating()
+        loadingIndicator.isHidden = true
+        thumbnailImage.image = image
+    }
 }

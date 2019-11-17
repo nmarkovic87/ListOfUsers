@@ -31,15 +31,15 @@ class ListUsersViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-       
-            let detailUserViewController = segue.destination as! DetailUserViewController
-            let index = tableView.indexPathForSelectedRow?.row
-            
-            let current = viewModel.userList[index!]
-            let user = UserInfo(firstName: current.name.first, lastName: current.name.last, age: current.dob.age, profilePicture: current.picture.large, email: current.email)
-            
-            
-            detailUserViewController.currentUserInfo = user
+        
+        let detailUserViewController = segue.destination as! DetailUserViewController
+        guard let index = tableView.indexPathForSelectedRow?.row else {return}
+        
+        let current = viewModel.getUserList()[index]
+        let user = UserInfo(firstName: current.name.first, lastName: current.name.last, age: current.dob.age, profilePicture: current.picture.large, email: current.email)
+        
+        
+        detailUserViewController.currentUserInfo = user
 
     }
 }
@@ -60,15 +60,16 @@ extension ListUsersViewController: UITableViewDelegate{
 
 extension ListUsersViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.userList.count
+        return viewModel.getUserList().count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "userCell") as? UserTableViewCell
         
         
-        if viewModel.userList.count > 0 {
-            let user = viewModel.userList[indexPath.row]
+        if viewModel.getUserList().count > 0 {
+            
+            let user = viewModel.getUserList()[indexPath.row]
             cell?.firstAndLastNameLabel.text = user.name.first.addNewString(user.name.last)
             cell?.ageLabel.text = String(user.dob.age)
             cell?.flagLabel.text = user.nat.getFlagFromString()
@@ -77,6 +78,6 @@ extension ListUsersViewController: UITableViewDataSource{
         }
         return cell!
     }
- 
+    
 }
 
