@@ -9,8 +9,6 @@
 import UIKit
 
 class ListUsersViewController: UIViewController {
-
-    
     
     var photosManager: PhotosManager { return .shared }
     
@@ -19,11 +17,7 @@ class ListUsersViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.navigationController?.navigationBar.barTintColor = UIColor.black
-        self.navigationController?.navigationBar.tintColor = UIColor.white
-        
-        
+        setupViewOnStart()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,6 +35,14 @@ class ListUsersViewController: UIViewController {
             let detailUserViewController = segue.destination as! DetailUserViewController
             
         }
+    }
+}
+
+extension ListUsersViewController {
+    func setupViewOnStart(){
+        self.navigationController?.navigationBar.barTintColor = UIColor.black
+        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
     }
 }
 

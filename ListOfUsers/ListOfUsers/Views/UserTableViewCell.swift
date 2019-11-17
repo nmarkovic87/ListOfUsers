@@ -12,15 +12,14 @@ import Alamofire
 class UserTableViewCell: UITableViewCell {
 
     var photosManager: PhotosManager { return .shared }
-
+    var request: Request?
+    var photo: UserPhoto!
+    
     @IBOutlet weak var thumbnailImage: UIImageView!
     @IBOutlet weak var firstAndLastNameLabel: UILabel!
     @IBOutlet weak var ageLabel: UILabel!
     @IBOutlet weak var flagLabel: UILabel!
     @IBOutlet var loadingIndicator: UIActivityIndicatorView!
-    
-    var request: Request?
-    var photo: UserPhoto!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,43 +32,41 @@ class UserTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        updateCornerRadius()
+        self.thumbnailImage.updateCornerRadius()
     }
     
-    func updateCornerRadius() {
-        let radius = self.thumbnailImage.frame.size.width / 2.0
-        self.thumbnailImage.layer.cornerRadius = radius
-        thumbnailImage.clipsToBounds = true
-    }
+}
+
+extension UserTableViewCell {
     
-    func loadAvatarImage(_ url:String) {
-        reset()
-        loadPicture(url)
-    }
+       func loadAvatarImage(_ url:String) {
+           removePicture()
+           loadPicture(url)
+       }
 
-    func reset() {
-        thumbnailImage.image = nil
-        request?.cancel()
-    }
+       func removePicture() {
+           thumbnailImage.image = nil
+           request?.cancel()
+       }
 
-   func loadPicture(_ url:String) {
-        if let image = photosManager.cachedImage(for: url) {
-            populateCellAvatarWithPicture(with: image)
-            return
-        }
-        downloadPicture(url)
-    }
+      func loadPicture(_ url:String) {
+           if let image = photosManager.cachedImage(for: url) {
+               populateCellAvatarWithPicture(with: image)
+               return
+           }
+           downloadPicture(url)
+       }
 
-    func downloadPicture(_ url:String) {
-        loadingIndicator.startAnimating()
-        request = photosManager.retrieveImage(for: url) { image in
-            self.populateCellAvatarWithPicture(with: image)
-        }
-    }
+       func downloadPicture(_ url:String) {
+           loadingIndicator.startAnimating()
+           request = photosManager.retrieveImage(for: url) { image in
+               self.populateCellAvatarWithPicture(with: image)
+           }
+       }
 
-    func populateCellAvatarWithPicture(with image: UIImage) {
-        loadingIndicator.stopAnimating()
-        loadingIndicator.isHidden = true
-        thumbnailImage.image = image
-    }
+       func populateCellAvatarWithPicture(with image: UIImage) {
+           loadingIndicator.stopAnimating()
+           loadingIndicator.isHidden = true
+           thumbnailImage.image = image
+       }
 }
