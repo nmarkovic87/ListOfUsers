@@ -10,7 +10,7 @@ import Foundation
 
 class ListUsersViewModel {
     
-     var userList: [Results]
+     private var userList: [Results]
     
      init(complition: @escaping () -> ()) {
         userList = [Results]()
@@ -19,5 +19,13 @@ class ListUsersViewModel {
             self?.userList = data.results
             complition()
         }
+    }
+    
+    func isUserListEmpty() -> Bool {
+       return self.userList.count > 0
+    }
+    
+    func getUserList() -> Array<Results> {
+        return self.userList
     }
 }

@@ -8,8 +8,7 @@
 
 import Foundation
 
-/// ResponseModel - Represent JSON data pulled from server
-
+/// Structs for decoding JSON response pulled from REST API
 struct ResponseModel: Codable{
     enum CodingKeys: String, CodingKey{
         case results

@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Struct for photo downloaded user image from server
 struct UserPhoto {
 
     let url: String

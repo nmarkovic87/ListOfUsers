@@ -30,11 +30,7 @@ class DetailUserViewController: UITableViewController, MFMailComposeViewControll
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.largePictureImageView.updateCornerRadius()
-        downloadProfilePicture(currentUserInfo!.profilePicture)
-        self.fullNameLabel.text = currentUserInfo?.firstName.addNewString(currentUserInfo!.lastName) 
-        self.ageLabel.text = String(currentUserInfo!.age)
-        self.emailButton.setTitle(currentUserInfo?.email, for: .normal)
+        loadAllUserInfo()
     }
     @IBAction func openMailComposer(_ sender: Any) {
         sendEmail(currentUserInfo!.email)
@@ -43,6 +39,14 @@ class DetailUserViewController: UITableViewController, MFMailComposeViewControll
 
 extension DetailUserViewController {
     
+    fileprivate func loadAllUserInfo() {
+        self.largePictureImageView.updateCornerRadius()
+        downloadProfilePicture(currentUserInfo!.profilePicture)
+        self.fullNameLabel.text = currentUserInfo!.firstName.addNewString(currentUserInfo!.lastName)
+        self.ageLabel.text = String(currentUserInfo!.age)
+        self.emailButton.setTitle(currentUserInfo!.email, for: .normal)
+    }
+    
     func downloadProfilePicture(_ url:String) {
         request = photosManager.retrieveImage(for: url) { image in
             self.displayProfilePicture(with: image)
@@ -50,7 +54,9 @@ extension DetailUserViewController {
     }
     
     func displayProfilePicture(with image: UIImage) {
-        self.largePictureImageView.image = image
+        DispatchQueue.main.async{
+            self.largePictureImageView.image = image
+        }
     }
     
     func sendEmail(_ email:String) {
@@ -63,11 +69,22 @@ extension DetailUserViewController {
             
             present(mail, animated: true)
         } else {
-            // show alert
+            showAlert()
         }
     }
     
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+    internal func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)
+    }
+    
+    private func showAlert(){
+        let alertController = UIAlertController(title: "Error",
+                                                     message: "Problem with composing email",
+                                                     preferredStyle: .alert)
+
+        let defaultAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+                  alertController.addAction(defaultAction)
+
+        self.present(alertController, animated: true, completion: nil)
     }
 }

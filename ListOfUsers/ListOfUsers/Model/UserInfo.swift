@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Struct for user info pulled from response model
 struct UserInfo {
     let firstName: String
     let lastName: String

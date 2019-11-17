@@ -15,8 +15,12 @@ class ApiRequests {
     
     static let shared = ApiRequests()
     
+    /// Constant URL link for gettings JSON from REST API
     private static let LINK = "https://randomuser.me/api?page=1&results=20"
     
+    
+    /// Fetch JSON from current link
+    /// - Parameter completion: ResponseModel
     func fetchResponseModel(completion: @escaping (ResponseModel) -> Void) {
         Alamofire.request(URL(string:ApiRequests.LINK)!,
                           method: .get,
@@ -33,8 +37,8 @@ class ApiRequests {
                         print(decodingError)
                     }
                     
-                case .failure(_):
-                    print("Error")
+                case .failure(let error):
+                    print("Failed to retreive JSON from link. Error: \(error)")
                 }
         }
     }
