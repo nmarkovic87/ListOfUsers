@@ -8,8 +8,12 @@
 
 import UIKit
 import MessageUI
+import Alamofire
 
 class DetailUserViewController: UITableViewController, MFMailComposeViewControllerDelegate {
+    
+    var photosManager: PhotosManager { return .shared }
+    var request: Request?
     
     @IBOutlet weak var largePictureImageView: UIImageView!
     @IBOutlet weak var fullNameLabel: UILabel!
@@ -25,6 +29,9 @@ class DetailUserViewController: UITableViewController, MFMailComposeViewControll
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.largePictureImageView.updateCornerRadius()
+        downloadProfilePicture(currentUserInfo!.profilePicture)
         self.fullNameLabel.text = currentUserInfo?.firstName
         self.ageLabel.text = String(currentUserInfo!.age)
         self.emailButton.setTitle(currentUserInfo?.email, for: .normal)
@@ -35,6 +42,16 @@ class DetailUserViewController: UITableViewController, MFMailComposeViewControll
 }
 
 extension DetailUserViewController {
+    
+    func downloadProfilePicture(_ url:String) {
+        request = photosManager.retrieveImage(for: url) { image in
+            self.displayProfilePicture(with: image)
+        }
+    }
+    
+    func displayProfilePicture(with image: UIImage) {
+        self.largePictureImageView.image = image
+    }
     
     func sendEmail(_ email:String) {
         if MFMailComposeViewController.canSendMail() {
