@@ -13,48 +13,60 @@ class ListUsersViewController: UIViewController {
     var photosManager: PhotosManager { return .shared }
     
     @IBOutlet weak var tableView: UITableView!
-    var viewModel: ListUsersViewModel!
+    private var viewModel: ListUsersViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupViewOnStart()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
         viewModel = ListUsersViewModel(complition: {
-            DispatchQueue.main.async{
-                self.tableView.reloadData()
-            }
+            self.refreshList()
         })
+        
+        setupViewOnStart()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         let detailUserViewController = segue.destination as! DetailUserViewController
+        
         guard let index = tableView.indexPathForSelectedRow?.row else {return}
         
-        let current = viewModel.getUserList()[index]
-        let user = UserInfo(firstName: current.name.first, lastName: current.name.last, age: current.dob.age, profilePicture: current.picture.large, email: current.email)
+        detailUserViewController.currentUserInfo = getCurrentSelectedUser(index)
         
-        
-        detailUserViewController.currentUserInfo = user
-
     }
 }
 
 extension ListUsersViewController {
-    func setupViewOnStart(){
+    
+    /// Setup view appearance
+    private func setupViewOnStart(){
+        prepareNavigationBar()
+        self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+    }
+    
+    /// Prepare navigation bar
+    private func prepareNavigationBar() {
         self.navigationController?.navigationBar.barTintColor = UIColor.black
         self.navigationController?.navigationBar.tintColor = UIColor.white
-        self.tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+    }
+    
+    /// Get user from array
+    /// - Parameter index: index of current user
+    private func getCurrentSelectedUser(_ index:Int) -> UserInfo{
+        let current = viewModel.getUserList()[index]
+        return  UserInfo(firstName: current.name.first, lastName: current.name.last, age: current.dob.age, profilePicture: current.picture.large, email: current.email)
+    }
+    
+    /// Refresh user list
+    private func refreshList(){
+        DispatchQueue.main.async{
+            self.tableView.reloadData()
+        }
     }
 }
 
 extension ListUsersViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70.0
+        return CGFloat(Constants.CELL_HEIGHT)
     }
 }
 
@@ -64,8 +76,7 @@ extension ListUsersViewController: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "userCell") as? UserTableViewCell
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: Constants.CELL_INDETIFIER) as? UserTableViewCell
         
         if viewModel.getUserList().count > 0 {
             
@@ -78,6 +89,4 @@ extension ListUsersViewController: UITableViewDataSource{
         }
         return cell!
     }
-    
 }
-

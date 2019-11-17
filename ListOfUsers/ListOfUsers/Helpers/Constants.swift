@@ -13,5 +13,4 @@ struct Constants {
     static let CELL_HEIGHT = 70.0
     static let CELL_INDETIFIER = "userCell"
     static let BASE_SIZE = 127397
-    
 }

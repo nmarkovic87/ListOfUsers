@@ -31,16 +31,16 @@ extension UIImageView {
 extension String {
     /// Add new string on current
     func addNewString(_ new:String) -> String {
-           return [self, new].compactMap{ $0 }.joined(separator: " ")
+        return [self, new].compactMap{ $0 }.joined(separator: " ")
     }
     /// Get flag emoji from string
     func getFlagFromString() -> String {
-           let base : UInt32 = 127397
-           var flagString = ""
-           for v in self.uppercased().unicodeScalars {
-               flagString.unicodeScalars.append(UnicodeScalar(base + v.value)!)
-           }
-           return flagString
+        let base : UInt32 = UInt32(Constants.BASE_SIZE)
+        var flagString = ""
+        for v in self.uppercased().unicodeScalars {
+            flagString.unicodeScalars.append(UnicodeScalar(base + v.value)!)
+        }
+        return flagString
     }
 }
 

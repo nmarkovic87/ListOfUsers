@@ -13,8 +13,7 @@ import Alamofire
 class UserTableViewCell: UITableViewCell {
     
     var photosManager: PhotosManager { return .shared }
-    var request: Request?
-    var photo: UserPhoto!
+    private var request: Request?
     
     @IBOutlet weak var thumbnailImage: UIImageView!
     @IBOutlet weak var firstAndLastNameLabel: UILabel!
@@ -37,25 +36,26 @@ class UserTableViewCell: UITableViewCell {
     }
     
 }
+
 ///Custom table view cell extension
 extension UserTableViewCell {
     
     /// Load avatar image in user cell
     /// - Parameter url: url for downloading avatar image
-    func loadAvatarImage(_ url:String) {
+    internal func loadAvatarImage(_ url:String) {
         removePicture()
         loadPicture(url)
     }
     
     /// Remove avatar image from user cell
-    func removePicture() {
+    private func removePicture() {
         thumbnailImage.image = nil
         request?.cancel()
     }
     
-    /// Load cached image
+    /// Load cached image or download from URL
     /// - Parameter url: URL for avatar image
-    func loadPicture(_ url:String) {
+    private func loadPicture(_ url:String) {
         if let image = photosManager.getCachedImage(for: url) {
             populateCellAvatarWithPicture(with: image)
             return
@@ -65,7 +65,7 @@ extension UserTableViewCell {
     
     /// Download avatar image from server
     /// - Parameter url: URL for image
-    func downloadPicture(_ url:String) {
+    private func downloadPicture(_ url:String) {
         loadingIndicator.startAnimating()
         request = photosManager.retrieveImage(for: url) { image in
             self.populateCellAvatarWithPicture(with: image)
@@ -74,7 +74,7 @@ extension UserTableViewCell {
     
     /// Populate image view in cell
     /// - Parameter image: current image avatar
-    func populateCellAvatarWithPicture(with image: UIImage) {
+    private func populateCellAvatarWithPicture(with image: UIImage) {
         loadingIndicator.stopAnimating()
         loadingIndicator.isHidden = true
         thumbnailImage.image = image

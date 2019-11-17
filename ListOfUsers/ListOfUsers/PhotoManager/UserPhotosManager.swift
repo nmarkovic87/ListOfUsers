@@ -13,14 +13,16 @@ import AlamofireImage
 class PhotosManager {
 
     static let shared = PhotosManager()
+    
     /// Create image cache with AutoPurgingImageCache
     let imageCache = AutoPurgingImageCache(
         memoryCapacity: UInt64(100).megabytes(),
         preferredMemoryUsageAfterPurge: UInt64(60).megabytes()
     )
+    
     /// Get cached image
     /// - Parameter url: specifi URL for image
-    func getCachedImage(for url: String) -> Image? {
+    public func getCachedImage(for url: String) -> Image? {
            return imageCache.image(withIdentifier: url)
     }
     
@@ -28,12 +30,10 @@ class PhotosManager {
     /// - Parameters:
     ///   - url: URL path for image
     ///   - completion: -
-
-    func retrieveImage(for url: String, completion: @escaping (UIImage) -> Void) -> Request {
+    public func retrieveImage(for url: String, completion: @escaping (UIImage) -> Void) -> Request {
         return Alamofire.request(url, method: .get).responseImage { response in
             guard let image = response.result.value else { return }
             completion(image)
         }
     }
-    
 }

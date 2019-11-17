@@ -8,24 +8,29 @@
 
 import Foundation
 
+/// Class ListUsersViewModel 
 class ListUsersViewModel {
     
+    /// Array for storing list of users
      private var userList: [Results]
     
      init(complition: @escaping () -> ()) {
         userList = [Results]()
         
+        //Start pulling JSON data from specific URL
         ApiRequests.shared.fetchResponseModel() { [weak self] data in
             self?.userList = data.results
             complition()
         }
     }
     
-    func isUserListEmpty() -> Bool {
+    /// Check if user list array is empty
+    public func isUserListEmpty() -> Bool {
        return self.userList.count > 0
     }
     
-    func getUserList() -> Array<Results> {
+    /// Get user list
+    public func getUserList() -> [Results] {
         return self.userList
     }
 }
