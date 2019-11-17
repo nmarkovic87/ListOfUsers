@@ -14,6 +14,7 @@
 		D3AF41B22380C2A500577455 /* UserPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AF41B12380C2A500577455 /* UserPhoto.swift */; };
 		D3AF41B42380C2F600577455 /* UserPhotosManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AF41B32380C2F600577455 /* UserPhotosManager.swift */; };
 		D3AF41B82380D23300577455 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AF41B72380D23300577455 /* Extensions.swift */; };
+		D3AF41BA23818EE000577455 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AF41B923818EE000577455 /* UserInfo.swift */; };
 		D3B836AC237F62F40048D0C1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B836AB237F62F40048D0C1 /* AppDelegate.swift */; };
 		D3B836AE237F62F40048D0C1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B836AD237F62F40048D0C1 /* SceneDelegate.swift */; };
 		D3B836B0237F62F40048D0C1 /* ListUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B836AF237F62F40048D0C1 /* ListUsersViewController.swift */; };
@@ -33,6 +34,7 @@
 		D3AF41B12380C2A500577455 /* UserPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPhoto.swift; sourceTree = "<group>"; };
 		D3AF41B32380C2F600577455 /* UserPhotosManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPhotosManager.swift; sourceTree = "<group>"; };
 		D3AF41B72380D23300577455 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		D3AF41B923818EE000577455 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		D3B836A8237F62F40048D0C1 /* ListOfUsers.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ListOfUsers.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3B836AB237F62F40048D0C1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D3B836AD237F62F40048D0C1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -135,6 +137,7 @@
 			children = (
 				D3B836C2237F6D160048D0C1 /* ResponseModel.swift */,
 				D3AF41B12380C2A500577455 /* UserPhoto.swift */,
+				D3AF41B923818EE000577455 /* UserInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 				D3B836AC237F62F40048D0C1 /* AppDelegate.swift in Sources */,
 				D3AF41B22380C2A500577455 /* UserPhoto.swift in Sources */,
 				D3AF41AA23809F1C00577455 /* UserTableViewCell.swift in Sources */,
+				D3AF41BA23818EE000577455 /* UserInfo.swift in Sources */,
 				D3AF41A5238075EF00577455 /* ApiRequests.swift in Sources */,
 				D3B836C0237F6CE40048D0C1 /* DetailUserViewController.swift in Sources */,
 				D3B836C3237F6D160048D0C1 /* ResponseModel.swift in Sources */,
