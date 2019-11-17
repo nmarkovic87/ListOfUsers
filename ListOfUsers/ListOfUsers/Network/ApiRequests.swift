@@ -11,7 +11,9 @@ import Alamofire
 
 /// Class for managing api requests for site https://randomuser.me
 
-class ApiRequests:NSObject {
+class ApiRequests {
+    
+    static let shared = ApiRequests()
     
     private static let LINK = "https://randomuser.me/api?page=1&results=20"
     

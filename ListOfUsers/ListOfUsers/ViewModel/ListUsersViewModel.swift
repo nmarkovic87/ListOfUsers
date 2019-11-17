@@ -15,22 +15,9 @@ class ListUsersViewModel {
      init(complition: @escaping () -> ()) {
         userList = [Results]()
         
-        ApiRequests().fetchResponseModel() { [weak self] data in
+        ApiRequests.shared.fetchResponseModel() { [weak self] data in
             self?.userList = data.results
             complition()
         }
-    }
-
-    func getFlag(from country:String) -> String {
-        let base : UInt32 = 127397
-        var flagString = ""
-        for v in country.uppercased().unicodeScalars {
-            flagString.unicodeScalars.append(UnicodeScalar(base + v.value)!)
-        }
-        return flagString
-    }
-    
-    func getFullName(_ firstName:String, _ lastName:String) -> String {
-           return [firstName, lastName].compactMap{ $0 }.joined(separator: " ")
     }
 }
