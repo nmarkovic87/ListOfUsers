@@ -31,10 +31,16 @@ class ListUsersViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "detailUserViewController"{
+       
             let detailUserViewController = segue.destination as! DetailUserViewController
+            let index = tableView.indexPathForSelectedRow?.row
             
-        }
+            let current = viewModel.userList[index!]
+            let user = UserInfo(firstName: current.name.first, lastName: current.name.last, age: current.dob.age, profilePicture: current.picture.large, email: current.email)
+            
+            
+            detailUserViewController.currentUserInfo = user
+
     }
 }
 
@@ -49,14 +55,6 @@ extension ListUsersViewController {
 extension ListUsersViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 70.0
-    }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if let detailUserViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "detailUserViewController") as? DetailUserViewController{
-            if let navigator = navigationController {
-                navigator.pushViewController(detailUserViewController, animated: true)
-            }
-        }
     }
 }
 
