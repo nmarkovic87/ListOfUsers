@@ -23,6 +23,7 @@
 		D3B836B8237F62F90048D0C1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D3B836B6237F62F90048D0C1 /* LaunchScreen.storyboard */; };
 		D3B836C0237F6CE40048D0C1 /* DetailUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B836BF237F6CE40048D0C1 /* DetailUserViewController.swift */; };
 		D3B836C3237F6D160048D0C1 /* ResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3B836C2237F6D160048D0C1 /* ResponseModel.swift */; };
+		D3F133CB2381F235009B99E2 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F133CA2381F235009B99E2 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		D3B836B9237F62F90048D0C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D3B836BF237F6CE40048D0C1 /* DetailUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailUserViewController.swift; sourceTree = "<group>"; };
 		D3B836C2237F6D160048D0C1 /* ResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseModel.swift; sourceTree = "<group>"; };
+		D3F133CA2381F235009B99E2 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F96E00E02EFFF948919C6346 /* Pods-ListOfUsers.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ListOfUsers.debug.xcconfig"; path = "Target Support Files/Pods-ListOfUsers/Pods-ListOfUsers.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,6 +112,7 @@
 				D3B836AD237F62F40048D0C1 /* SceneDelegate.swift */,
 				D3AF41B32380C2F600577455 /* UserPhotosManager.swift */,
 				D3AF41B72380D23300577455 /* Extensions.swift */,
+				D3F133CA2381F235009B99E2 /* Constants.swift */,
 				D3B836C4237F6DB60048D0C1 /* Model */,
 				D3AF41AE2380BBBD00577455 /* ViewModel */,
 				D3B836C1237F6CEE0048D0C1 /* Views */,
@@ -272,6 +275,7 @@
 				D3AF41BA23818EE000577455 /* UserInfo.swift in Sources */,
 				D3AF41A5238075EF00577455 /* ApiRequests.swift in Sources */,
 				D3B836C0237F6CE40048D0C1 /* DetailUserViewController.swift in Sources */,
+				D3F133CB2381F235009B99E2 /* Constants.swift in Sources */,
 				D3B836C3237F6D160048D0C1 /* ResponseModel.swift in Sources */,
 				D3AF41B02380BE5F00577455 /* ListUsersViewModel.swift in Sources */,
 				D3B836AE237F62F40048D0C1 /* SceneDelegate.swift in Sources */,
