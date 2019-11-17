@@ -97,6 +97,12 @@
                         <viewLayoutGuide key="safeArea" id="0k8-W2-odZ"/>
                     </view>
                     <navigationItem key="navigationItem" id="G7h-Tz-B0r"/>
+                    <connections>
+                        <outlet property="ageLabel" destination="ZMF-KD-f5H" id="XnB-7O-q7j"/>
+                        <outlet property="emailButton" destination="OBn-Pg-KPw" id="YBm-E2-8Kv"/>
+                        <outlet property="fullNameLabel" destination="ps3-Yc-mmK" id="84B-gX-QVj"/>
+                        <outlet property="largePictureImageView" destination="coe-eh-MeK" id="ZnK-Vk-SXh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tbk-Ag-Ncf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

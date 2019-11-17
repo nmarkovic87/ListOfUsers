@@ -11,6 +11,11 @@ import MessageUI
 
 class DetailUserViewController: UIViewController, MFMailComposeViewControllerDelegate {
     
+    @IBOutlet weak var largePictureImageView: UIImageView!
+    @IBOutlet weak var fullNameLabel: UILabel!
+    @IBOutlet weak var ageLabel: UILabel!
+    @IBOutlet weak var emailButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -19,7 +24,6 @@ class DetailUserViewController: UIViewController, MFMailComposeViewControllerDel
     @IBAction func openMailComposer(_ sender: Any) {
         sendEmail()
     }
-    
 }
 
 extension DetailUserViewController {
