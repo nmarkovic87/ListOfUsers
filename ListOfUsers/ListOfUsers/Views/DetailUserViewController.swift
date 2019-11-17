@@ -32,7 +32,7 @@ class DetailUserViewController: UITableViewController, MFMailComposeViewControll
         
         self.largePictureImageView.updateCornerRadius()
         downloadProfilePicture(currentUserInfo!.profilePicture)
-        self.fullNameLabel.text = currentUserInfo?.firstName
+        self.fullNameLabel.text = currentUserInfo?.firstName.addNewString(currentUserInfo!.lastName) 
         self.ageLabel.text = String(currentUserInfo!.age)
         self.emailButton.setTitle(currentUserInfo?.email, for: .normal)
     }

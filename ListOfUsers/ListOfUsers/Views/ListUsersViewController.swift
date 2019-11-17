@@ -69,9 +69,9 @@ extension ListUsersViewController: UITableViewDataSource{
         
         if viewModel.userList.count > 0 {
             let user = viewModel.userList[indexPath.row]
-            cell?.firstAndLastNameLabel.text = viewModel.getFullName(user.name.first, user.name.last)
+            cell?.firstAndLastNameLabel.text = user.name.first.addNewString(user.name.last)
             cell?.ageLabel.text = String(user.dob.age)
-            cell?.flagLabel.text = viewModel.getFlag(from: user.nat)
+            cell?.flagLabel.text = user.nat.getFlagFromString()
             cell?.loadAvatarImage(user.picture.thumbnail)
             
         }

@@ -24,3 +24,18 @@ extension UIImageView {
     }
 }
 
+extension String {
+    func addNewString(_ new:String) -> String {
+           return [self, new].compactMap{ $0 }.joined(separator: " ")
+    }
+    
+    func getFlagFromString() -> String {
+           let base : UInt32 = 127397
+           var flagString = ""
+           for v in self.uppercased().unicodeScalars {
+               flagString.unicodeScalars.append(UnicodeScalar(base + v.value)!)
+           }
+           return flagString
+    }
+}
+
