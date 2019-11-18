@@ -17,10 +17,11 @@ class ListUsersViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = ListUsersViewModel(complition: {
+
+        viewModel = ListUsersViewModel()
+        viewModel.fetchUserList(complition: {
             self.refreshList()
         })
-        
         setupViewOnStart()
     }
     
@@ -68,6 +69,12 @@ extension ListUsersViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(Constants.CELL_HEIGHT)
     }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let animation = AnimationFactory.makeMoveUpWithBounce(rowHeight: cell.frame.height, duration: 1.0, delayFactor: 0.05)
+        let animator = Animator(animation: animation)
+        animator.animate(cell: cell, at: indexPath, in: tableView)
+    }
 }
 
 extension ListUsersViewController: UITableViewDataSource{
@@ -90,3 +97,5 @@ extension ListUsersViewController: UITableViewDataSource{
         return cell!
     }
 }
+
+

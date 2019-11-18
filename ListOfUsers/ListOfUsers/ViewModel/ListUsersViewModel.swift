@@ -12,10 +12,9 @@ import Foundation
 class ListUsersViewModel {
     
     /// Array for storing list of users
-     private var userList: [Results]
-    
-     init(complition: @escaping () -> ()) {
-        userList = [Results]()
+    private var userList: [Results] = [Results]()
+        
+    public func fetchUserList(complition: @escaping () -> ()) {
         
         //Start pulling JSON data from specific URL
         ApiRequests.shared.fetchResponseModel() { [weak self] data in
@@ -23,7 +22,6 @@ class ListUsersViewModel {
             complition()
         }
     }
-    
     /// Check if user list array is empty
     public func isUserListEmpty() -> Bool {
        return self.userList.count > 0

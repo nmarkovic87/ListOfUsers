@@ -71,7 +71,7 @@ extension DetailUserViewController {
             mail.mailComposeDelegate = self
             mail.setToRecipients([email])
             mail.setSubject("New subject")
-            mail.setMessageBody("<p>Best Regards, \(String(describing: currentUserInfo!.firstName)) </p>", isHTML: true)
+            mail.setMessageBody("<p>Best Regards,</p><p>\(String(describing: currentUserInfo!.firstName.addNewString(currentUserInfo!.lastName)))</p>", isHTML: true)
             
             present(mail, animated: true)
         } else {
